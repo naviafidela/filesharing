@@ -11,7 +11,7 @@ def start_button(client):
         buttons = [
             [
                 InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅs", callback_data="help"),
-                InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data="close"),
+                InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ p", callback_data="close"),
             ],
         ]
         return buttons
