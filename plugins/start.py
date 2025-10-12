@@ -182,13 +182,20 @@ async def not_joined(client: Bot, message: Message):
 
         # Isi pesan
         text_msg = (
-            f"👋 Halo {message.from_user.first_name}!\n\n"
-            f"🎬 <b>{title}</b>\n\n"
-            f"Klik tombol di bawah untuk menonton di Streamdex ⬇️"
+            f"📺 <b>{title}</b>\n\n"
+            f"<a href='https://bokepsenja.com'>©️<b>Bokepsenja.com</b></a>"
         )
 
         # Tombol di bawah pesan
-        buttons = [[InlineKeyboardButton("🎥 Lihat di Streamdex", url=url)]]
+        buttons = [
+            [
+                InlineKeyboardButton("🔥ʙᴜᴋᴀ ʟɪɴᴋ ᴠɪᴅᴇᴏ🔥", url=url)
+            ],
+            [
+                InlineKeyboardButton("ᴊᴏɪɴ ɢʀᴜᴘ", url="https://t.me/+FDTYBy3kQI8wZWQ9")
+                InlineKeyboardButton("ᴠɪᴅᴇᴏ ʟᴀɪɴʏᴀ", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy")
+            ],
+        ]
 
         # Kirim foto dengan spoiler
         if photo:
