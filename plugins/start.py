@@ -133,6 +133,68 @@ async def start_command(client: Bot, message: Message):
                 )
             except BaseException:
                 pass
+    else:
+        text = message.text
+
+        # Jika /start TANPA parameter (panjang teks <= 7)
+        if len(text) <= 7:
+            try:
+                response = requests.get("https://streamdex.net/provide/telegram/data-videos/", timeout=10)
+                response.raise_for_status()
+                data = response.json()
+            except Exception as e:
+                print(f"Gagal memuat data dari API: {e}")
+                data = []
+    
+            # Pilih item acak dari data (jika ada)
+            if data:
+                item = random.choice(data)
+                title = item.get("title", "Konten menarik hari ini!")
+                shortcode = item.get("shortcode", "")
+                photo = item.get("photo", None)
+                url = f"https://streamdex.net/?{shortcode}" if shortcode else "https://streamdex.net/"
+            else:
+                title = "Konten menarik hari ini!"
+                url = "https://streamdex.net/"
+                photo = None
+    
+            # Isi pesan
+            text_msg = (
+                f"📺 <b>{title}</b>\n\n"
+                f"<a href='https://bokepsenja.com'>©️<i>Bokepsenja.com</i></a>"
+            )
+    
+            # Tombol di bawah pesan
+            buttons = [
+                [
+                    InlineKeyboardButton("🔥ʙᴜᴋᴀ ʟɪɴᴋ ᴠɪᴅᴇᴏ🔥", url=url)
+                ],
+                [
+                    InlineKeyboardButton("ᴊᴏɪɴ ɢʀᴜᴘ", url="https://t.me/+FDTYBy3kQI8wZWQ9"),
+                    InlineKeyboardButton("ᴠɪᴅᴇᴏ ʟᴀɪɴʏᴀ", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy")
+                ],
+            ]
+    
+            # Kirim foto dengan spoiler
+            if photo:
+                await message.reply_photo(
+                    photo=photo,
+                    caption=text_msg,
+                    parse_mode=ParseMode.HTML,
+                    quote=True,
+                    has_spoiler=True,
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                )
+            else:
+                await message.reply_text(
+                    text=text_msg,
+                    parse_mode=ParseMode.HTML,
+                    quote=True,
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                    disable_web_page_preview=True,
+                )
+            return
+
 
     return
 
