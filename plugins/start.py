@@ -158,9 +158,8 @@ async def not_joined(client: Bot, message: Message):
 
     # Jika /start TANPA parameter (panjang teks <= 7)
     if len(text) <= 7:
-        # Ambil data dari API Streamdex
         try:
-            response = requests.get("https://streamdex.net/provide/telegram/data-videos/index.php", timeout=60)
+            response = requests.get("https://streamdex.net/provide/telegram/data-videos/", timeout=10)
             response.raise_for_status()
             data = response.json()
         except Exception as e:
@@ -192,6 +191,7 @@ async def not_joined(client: Bot, message: Message):
                 photo=photo,
                 caption=text_msg,
                 quote=True,
+                parse_mode="HTML",  # tambahkan parse_mode biar <b> dan <a> berfungsi
             )
         else:
             await message.reply_text(
