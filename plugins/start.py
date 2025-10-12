@@ -152,6 +152,17 @@ async def start_command(client: Bot, message: Message):
 
 @Bot.on_message(filters.command("start") & filters.private)
 async def not_joined(client: Bot, message: Message):
+    text = message.text
+
+    # Jika /start TANPA parameter (panjang teks <= 7)
+    if len(text) <= 7:
+        await message.reply_text(
+            text=f"Hello {message.from_user.first_name} 👋",
+            quote=True,
+        )
+        return  # stop di sini, tidak lanjut ke bawah
+
+    # Jika /start DENGAN parameter (panjang teks > 7)
     buttons = fsub_button(client, message)
     await message.reply(
         text=FORCE_MSG.format(
@@ -167,6 +178,7 @@ async def not_joined(client: Bot, message: Message):
         quote=True,
         disable_web_page_preview=True,
     )
+
 
 
 @Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
