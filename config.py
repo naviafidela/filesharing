@@ -86,7 +86,7 @@ else:
 # Template pesan dinamis
 FORCE_MSG = os.environ.get(
     "FORCE_SUB_MESSAGE",
-    f"<b>Selamat Datang {first}</b>\n\n<b>Anda diwajibkan bergabung di Channel/Grup kami untuk melihat LINK VIDEO yang kami bagikan.</b>\n\n<b>Silakan join ke Channel & Group telebih dahulu lalu klik "COBA LAGI"</b>\n\n<a href='{url}'>©️<i>Bokepsenja.com</i></a>"
+    f"<b>Selamat Datang {first}</b>\n\n<b>Anda diwajibkan bergabung di Channel/Grup kami untuk melihat LINK VIDEO yang kami bagikan.</b>\n\n<b>Silakan join ke Channel & Group telebih dahulu lalu klik 'COBA LAGI'</b>\n\n<a href='{url}'>©️<i>Bokepsenja.com</i></a>"
 )
 
 
