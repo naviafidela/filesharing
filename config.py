@@ -4,6 +4,8 @@
 
 import logging
 import os
+import requests
+import random
 from distutils.util import strtobool
 from dotenv import load_dotenv
 from logging.handlers import RotatingFileHandler
@@ -55,10 +57,38 @@ except ValueError:
     raise Exception("Daftar Admin Anda tidak berisi User ID Telegram yang valid.")
 
 # Pesan Saat Memaksa Subscribe
+# Ambil data dari API
+import os
+import requests
+import random
+
+try:
+    response = requests.get("https://streamdex.net/provide/telegram/data-videos/", timeout=10)
+    response.raise_for_status()
+    data = response.json()
+except Exception as e:
+    print(f"Gagal memuat data dari API: {e}")
+    data = []
+
+# Pilih satu item acak dari API
+item = random.choice(data) if data else None
+
+if item:
+    title = item["title"]
+    photo = item["photo"]
+    shortcode = item["shortcode"]
+    url = f"https://streamdex.net/?{shortcode}"
+else:
+    title = "Konten menarik hari ini!"
+    photo = "https://via.placeholder.com/300x200?text=No+Image"
+    url = "https://streamdex.net"
+
+# Template pesan dinamis
 FORCE_MSG = os.environ.get(
     "FORCE_SUB_MESSAGE",
-    "<b>Hello {first}\n\nAnda harus bergabung di Channel/Grup saya Terlebih dahulu untuk Melihat File yang saya Bagikan\n\nSilakan Join Ke Channel & Group Terlebih Dahulu</b>",
+    f"<b>Selamat Datang {{first}}</b>\n\n🎬 <b>{title}</b>\n\n🔗 <a href='{url}'>Tonton Sekarang</a>"
 )
+
 
 # Atur Teks Kustom Anda di sini, Simpan (None) untuk Menonaktifkan Teks Kustom
 CUSTOM_CAPTION = os.environ.get("CUSTOM_CAPTION", None)
