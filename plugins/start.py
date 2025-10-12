@@ -7,6 +7,7 @@ from datetime import datetime
 from time import time
 import requests
 import random
+from pyrogram.enums import ParseMode
 
 from bot import Bot
 from config import (
@@ -191,7 +192,7 @@ async def not_joined(client: Bot, message: Message):
                 photo=photo,
                 caption=text_msg,
                 quote=True,
-                parse_mode="HTML",  # tambahkan parse_mode biar <b> dan <a> berfungsi
+                parse_mode=ParseMode.HTML
             )
         else:
             await message.reply_text(
