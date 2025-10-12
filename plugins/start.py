@@ -150,7 +150,7 @@ async def start_command(client: Bot, message: Message):
     return
 
 
-@Bot.on_message(filters.command("start") & filters.private)
+@Bot.on_message(filters.command("start") & filters.private & filters.regex(r"^/start\s+\S+") & subsall & subsch & subsgc)
 async def not_joined(client: Bot, message: Message):
     buttons = fsub_button(client, message)
     await message.reply(
