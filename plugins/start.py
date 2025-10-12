@@ -192,7 +192,7 @@ async def not_joined(client: Bot, message: Message):
                 InlineKeyboardButton("🔥ʙᴜᴋᴀ ʟɪɴᴋ ᴠɪᴅᴇᴏ🔥", url=url)
             ],
             [
-                InlineKeyboardButton("ᴊᴏɪɴ ɢʀᴜᴘ", url="https://t.me/+FDTYBy3kQI8wZWQ9")
+                InlineKeyboardButton("ᴊᴏɪɴ ɢʀᴜᴘ", url="https://t.me/+FDTYBy3kQI8wZWQ9"),
                 InlineKeyboardButton("ᴠɪᴅᴇᴏ ʟᴀɪɴʏᴀ", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy")
             ],
         ]
