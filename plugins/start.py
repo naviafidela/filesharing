@@ -151,18 +151,10 @@ async def start_command(client: Bot, message: Message):
 
 
 @Bot.on_message(filters.command("start") & filters.private)
-async def not_joined(client: Bot, message: Message):
+async def(client: Bot, message: Message):
     buttons = fsub_button(client, message)
     await message.reply(
-        text=FORCE_MSG.format(
-            first=message.from_user.first_name,
-            last=message.from_user.last_name,
-            username=f"@{message.from_user.username}"
-            if message.from_user.username
-            else None,
-            mention=message.from_user.mention,
-            id=message.from_user.id,
-        ),
+        text="Halo",
         reply_markup=InlineKeyboardMarkup(buttons),
         quote=True,
         disable_web_page_preview=True,
