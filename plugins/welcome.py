@@ -20,7 +20,7 @@ async def add_group(client, message):
 
         share_message = (
             "🔥𝗕𝗘𝗥𝗚𝗔𝗕𝗨𝗡𝗚 𝗗𝗜 𝗚𝗥𝗨𝗣 𝗕𝗔𝗥𝗨🔥\n\n"
-            "⭐ 𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼 💦/n"
+            "⭐ 𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼 💦\n"
             "➤ __https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy__\n\n"
             "⭐ 𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼 💦\n"
             "➤ __https://t.me/joinchat/JdpYxovFx3IyMjg1__\n\n"
