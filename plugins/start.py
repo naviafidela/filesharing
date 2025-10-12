@@ -192,7 +192,6 @@ async def not_joined(client: Bot, message: Message):
                 photo=photo,
                 caption=text_msg,
                 quote=True,
-                disable_web_page_preview=True,
             )
         else:
             await message.reply_text(
