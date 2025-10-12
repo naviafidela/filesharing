@@ -151,7 +151,7 @@ async def start_command(client: Bot, message: Message):
 
 
 @Bot.on_message(filters.command("start") & filters.private)
-async def(client: Bot, message: Message):
+async def start_handler(client: Bot, message: Message):
     buttons = fsub_button(client, message)
     await message.reply(
         text="Halo",
