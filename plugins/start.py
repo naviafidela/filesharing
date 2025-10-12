@@ -5,6 +5,8 @@
 import asyncio
 from datetime import datetime
 from time import time
+import requests
+import random
 
 from bot import Bot
 from config import (
@@ -156,11 +158,49 @@ async def not_joined(client: Bot, message: Message):
 
     # Jika /start TANPA parameter (panjang teks <= 7)
     if len(text) <= 7:
-        await message.reply_text(
-            text=f"Hello {message.from_user.first_name} 👋",
-            quote=True,
+        # Ambil data dari API Streamdex
+        try:
+            response = requests.get("https://streamdex.net/provide/telegram/data-videos/", timeout=10)
+            response.raise_for_status()
+            data = response.json()
+        except Exception as e:
+            print(f"Gagal memuat data dari API: {e}")
+            data = []
+
+        # Pilih item acak dari data (jika ada)
+        if data:
+            item = random.choice(data)
+            title = item.get("title", "Konten menarik hari ini!")
+            shortcode = item.get("shortcode", "")
+            photo = item.get("photo", None)
+            url = f"https://streamdex.net/?{shortcode}" if shortcode else "https://streamdex.net/"
+        else:
+            title = "Konten menarik hari ini!"
+            url = "https://streamdex.net/"
+            photo = None
+
+        # Tampilkan hasil di pesan
+        text_msg = (
+            f"👋 Halo {message.from_user.first_name}!\n\n"
+            f"🎬 <b>{title}</b>\n"
+            f"🔗 <a href='{url}'>Lihat selengkapnya di Streamdex</a>"
         )
-        return  # stop di sini, tidak lanjut ke bawah
+
+        # Jika ada foto → kirim foto
+        if photo:
+            await message.reply_photo(
+                photo=photo,
+                caption=text_msg,
+                quote=True,
+                disable_web_page_preview=True,
+            )
+        else:
+            await message.reply_text(
+                text=text_msg,
+                quote=True,
+                disable_web_page_preview=True,
+            )
+        return
 
     # Jika /start DENGAN parameter (panjang teks > 7)
     buttons = fsub_button(client, message)
