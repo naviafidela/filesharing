@@ -158,58 +158,59 @@ async def start_command(client: Bot, message: Message):
 async def not_joined(client: Bot, message: Message):
     text = message.text
 
+    # Jika /start TANPA parameter (panjang teks <= 7)
     if len(text) <= 7:
-    try:
-        response = requests.get("https://streamdex.net/provide/telegram/data-videos/", timeout=10)
-        response.raise_for_status()
-        data = response.json()
-    except Exception as e:
-        print(f"Gagal memuat data dari API: {e}")
-        data = []
+        try:
+            response = requests.get("https://streamdex.net/provide/telegram/data-videos/", timeout=10)
+            response.raise_for_status()
+            data = response.json()
+        except Exception as e:
+            print(f"Gagal memuat data dari API: {e}")
+            data = []
 
-    # Pilih item acak dari data (jika ada)
-    if data:
-        item = random.choice(data)
-        title = item.get("title", "Konten menarik hari ini!")
-        shortcode = item.get("shortcode", "")
-        photo = item.get("photo", None)
-        url = f"https://streamdex.net/?{shortcode}" if shortcode else "https://streamdex.net/"
-    else:
-        title = "Konten menarik hari ini!"
-        url = "https://streamdex.net/"
-        photo = None
+        # Pilih item acak dari data (jika ada)
+        if data:
+            item = random.choice(data)
+            title = item.get("title", "Konten menarik hari ini!")
+            shortcode = item.get("shortcode", "")
+            photo = item.get("photo", None)
+            url = f"https://streamdex.net/?{shortcode}" if shortcode else "https://streamdex.net/"
+        else:
+            title = "Konten menarik hari ini!"
+            url = "https://streamdex.net/"
+            photo = None
 
-    # Isi pesan
-    text_msg = (
-        f"👋 Halo {message.from_user.first_name}!\n\n"
-        f"🎬 <b>{title}</b>\n\n"
-        f"Klik tombol di bawah untuk menonton di Streamdex ⬇️"
-    )
-
-    # Tombol di bawah pesan
-    buttons = [[InlineKeyboardButton("🎥 Lihat di Streamdex", url=url)]]
-
-    # Kirim foto dengan spoiler
-    if photo:
-        await message.reply_photo(
-            photo=photo,
-            caption=text_msg,
-            parse_mode=ParseMode.HTML,
-            quote=True,
-            has_spoiler=True,  # 👈 ini yang bikin fotonya blur (spoiler)
-            reply_markup=InlineKeyboardMarkup(buttons),
+        # Isi pesan
+        text_msg = (
+            f"👋 Halo {message.from_user.first_name}!\n\n"
+            f"🎬 <b>{title}</b>\n\n"
+            f"Klik tombol di bawah untuk menonton di Streamdex ⬇️"
         )
-    else:
-        await message.reply_text(
-            text=text_msg,
-            parse_mode=ParseMode.HTML,
-            quote=True,
-            reply_markup=InlineKeyboardMarkup(buttons),
-            disable_web_page_preview=True,
-        )
-    return
 
-    # Jika /start DENGAN parameter (panjang teks > 7)
+        # Tombol di bawah pesan
+        buttons = [[InlineKeyboardButton("🎥 Lihat di Streamdex", url=url)]]
+
+        # Kirim foto dengan spoiler
+        if photo:
+            await message.reply_photo(
+                photo=photo,
+                caption=text_msg,
+                parse_mode=ParseMode.HTML,
+                quote=True,
+                has_spoiler=True,
+                reply_markup=InlineKeyboardMarkup(buttons),
+            )
+        else:
+            await message.reply_text(
+                text=text_msg,
+                parse_mode=ParseMode.HTML,
+                quote=True,
+                reply_markup=InlineKeyboardMarkup(buttons),
+                disable_web_page_preview=True,
+            )
+        return
+
+    # Jika /start DENGAN parameter
     buttons = fsub_button(client, message)
     await message.reply(
         text=FORCE_MSG.format(
@@ -225,6 +226,7 @@ async def not_joined(client: Bot, message: Message):
         quote=True,
         disable_web_page_preview=True,
     )
+
 
 
 
