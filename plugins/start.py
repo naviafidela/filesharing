@@ -158,9 +158,8 @@ async def start_command(client: Bot, message: Message):
 async def not_joined(client: Bot, message: Message):
     text = message.text
 
-    # Jika /start TANPA parameter (panjang teks <= 7)
     if len(text) <= 7:
-        try:
+    try:
         response = requests.get("https://streamdex.net/provide/telegram/data-videos/", timeout=10)
         response.raise_for_status()
         data = response.json()
