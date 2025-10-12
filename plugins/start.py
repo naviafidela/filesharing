@@ -22,7 +22,6 @@ from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked
 from pyrogram.types import InlineKeyboardMarkup, Message
 
 from helper_func import decode, get_messages, subsall, subsch, subsgc
-
 from .button import fsub_button, start_button
 
 START_TIME = datetime.utcnow()
@@ -43,31 +42,60 @@ async def _human_time_duration(seconds):
     for unit, div in TIME_DURATION_UNITS:
         amount, seconds = divmod(int(seconds), div)
         if amount > 0:
-            parts.append(f'{amount} {unit}{"" if amount == 1 else "s"}')
+            parts.append(f"{amount} {unit}{'' if amount == 1 else 's'}")
     return ", ".join(parts)
 
 
-@Bot.on_message(filters.command("start") & filters.private & filters.regex(r"^/start\s+\S+") & subsall & subsch & subsgc)
-async def start_command(client: Bot, message: Message):
-    id = message.from_user.id
-    user_name = (
-        f"@{message.from_user.username}"
-        if message.from_user.username
-        else None
-    )
+# ✅ Handler utama untuk /start (baik tanpa atau dengan parameter)
+@Bot.on_message(filters.command("start") & filters.private)
+async def start_handler(client: Bot, message: Message):
+    user_id = message.from_user.id
+    username = f"@{message.from_user.username}" if message.from_user.username else None
 
     try:
-        await add_user(id, user_name)
-    except:
+        await add_user(user_id, username)
+    except Exception:
         pass
-    text = message.text
+
+    text = message.text.strip()
+
+    # ✅ Jika user belum join semua channel (gunakan sistem fsub)
+    if not await subsall(client, message) or not await subsch(client, message) or not await subsgc(client, message):
+        buttons = fsub_button(client, message)
+        await message.reply(
+            text=FORCE_MSG.format(
+                first=message.from_user.first_name,
+                last=message.from_user.last_name,
+                username=username,
+                mention=message.from_user.mention,
+                id=message.from_user.id,
+            ),
+            reply_markup=InlineKeyboardMarkup(buttons),
+            quote=True,
+            disable_web_page_preview=True,
+        )
+        return
+
+    # ✅ Jika /start tanpa parameter
+    if text == "/start":
+        await message.reply_text(
+            text=f"Hai {message.from_user.first_name} 👋\nSelamat datang di bot ini!",
+            disable_web_page_preview=True,
+            quote=True,
+        )
+        return
+
+    # ✅ Jika /start dengan parameter (link)
     if len(text) > 7:
         try:
             base64_string = text.split(" ", 1)[1]
         except BaseException:
             return
+
         string = await decode(base64_string)
         argument = string.split("-")
+
+        # Tentukan daftar ID pesan yang harus diambil
         if len(argument) == 3:
             try:
                 start = int(int(argument[1]) / abs(client.db_channel.id))
@@ -89,26 +117,28 @@ async def start_command(client: Bot, message: Message):
                 ids = [int(int(argument[1]) / abs(client.db_channel.id))]
             except BaseException:
                 return
+        else:
+            return
+
         temp_msg = await message.reply("<code>Tunggu Sebentar...</code>")
         try:
             messages = await get_messages(client, ids)
         except BaseException:
-            await message.reply_text("<b>Telah Terjadi Error </b>🥺")
+            await message.reply_text("<b>Telah Terjadi Error 🥺</b>")
             return
         await temp_msg.delete()
 
         for msg in messages:
-
-            if bool(CUSTOM_CAPTION) & bool(msg.document):
+            if bool(CUSTOM_CAPTION) and bool(msg.document):
                 caption = CUSTOM_CAPTION.format(
                     previouscaption=msg.caption.html if msg.caption else "",
                     filename=msg.document.file_name,
                 )
-
             else:
                 caption = msg.caption.html if msg.caption else ""
 
             reply_markup = msg.reply_markup if DISABLE_CHANNEL_BUTTON else None
+
             try:
                 await msg.copy(
                     chat_id=message.from_user.id,
@@ -129,55 +159,17 @@ async def start_command(client: Bot, message: Message):
                 )
             except BaseException:
                 pass
-    else:
-        out = start_button(client)
-        await message.reply_text(
-            text=START_MSG.format(
-                first=message.from_user.first_name,
-                last=message.from_user.last_name,
-                username=f"@{message.from_user.username}"
-                if message.from_user.username
-                else None,
-                mention=message.from_user.mention,
-                id=message.from_user.id,
-            ),
-            reply_markup=InlineKeyboardMarkup(out),
-            disable_web_page_preview=True,
-            quote=True,
-        )
 
 
-    return
-
-
-@Bot.on_message(filters.command("start") & filters.private)
-async def not_joined(client: Bot, message: Message):
-    buttons = fsub_button(client, message)
-    await message.reply(
-        text=FORCE_MSG.format(
-            first=message.from_user.first_name,
-            last=message.from_user.last_name,
-            username=f"@{message.from_user.username}"
-            if message.from_user.username
-            else None,
-            mention=message.from_user.mention,
-            id=message.from_user.id,
-        ),
-        reply_markup=InlineKeyboardMarkup(buttons),
-        quote=True,
-        disable_web_page_preview=True,
-    )
-
-
+# ✅ Statistik pengguna
 @Bot.on_message(filters.command(["users", "stats"]) & filters.user(ADMINS))
 async def get_users(client: Bot, message: Message):
-    msg = await client.send_message(
-        chat_id=message.chat.id, text="<code>Processing ...</code>"
-    )
+    msg = await client.send_message(chat_id=message.chat.id, text="<code>Processing ...</code>")
     users = await full_userbase()
     await msg.edit(f"{len(users)} <b>Pengguna menggunakan bot ini</b>")
 
 
+# ✅ Broadcast pesan
 @Bot.on_message(filters.command("broadcast") & filters.user(ADMINS))
 async def send_text(client: Bot, message: Message):
     if message.reply_to_message:
@@ -189,9 +181,7 @@ async def send_text(client: Bot, message: Message):
         deleted = 0
         unsuccessful = 0
 
-        pls_wait = await message.reply(
-            "<code>Broadcasting Message Tunggu Sebentar...</code>"
-        )
+        pls_wait = await message.reply("<code>Broadcasting Message Tunggu Sebentar...</code>")
         for row in query:
             chat_id = int(row[0])
             if chat_id not in ADMINS:
@@ -219,13 +209,12 @@ Pengguna diblokir: <code>{blocked}</code>
 Akun Terhapus: <code>{deleted}</code></b>"""
         return await pls_wait.edit(status)
     else:
-        msg = await message.reply(
-            "<code>Gunakan Perintah ini Harus Sambil Reply ke pesan telegram yang ingin di Broadcast.</code>"
-        )
+        msg = await message.reply("<code>Gunakan perintah ini sambil reply pesan yang ingin di-broadcast.</code>")
         await asyncio.sleep(8)
         await msg.delete()
 
 
+# ✅ Ping command
 @Bot.on_message(filters.command("ping"))
 async def ping_pong(client, m: Message):
     start = time()
@@ -241,6 +230,7 @@ async def ping_pong(client, m: Message):
     )
 
 
+# ✅ Uptime info
 @Bot.on_message(filters.command("uptime"))
 async def get_uptime(client, m: Message):
     current_time = datetime.utcnow()
