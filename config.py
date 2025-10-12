@@ -62,31 +62,10 @@ import os
 import requests
 import random
 
-try:
-    response = requests.get("https://streamdex.net/provide/telegram/data-videos/index.php", timeout=60)
-    response.raise_for_status()
-    data = response.json()
-except Exception as e:
-    print(f"Gagal memuat data dari API: {e}")
-    data = []
-
-# Pilih satu item acak dari API
-item = random.choice(data) if data else None
-
-if item:
-    title = item["title"]
-    photo = item["photo"]
-    shortcode = item["shortcode"]
-    url = f"https://streamdex.net/?{shortcode}"
-else:
-    title = "Konten menarik hari ini!"
-    photo = "https://via.placeholder.com/300x200?text=No+Image"
-    url = "https://streamdex.net"
-
 # Template pesan dinamis
 FORCE_MSG = os.environ.get(
     "FORCE_SUB_MESSAGE",
-    f"<b>Selamat Datang {first}</b>\n\n<b>Anda diwajibkan bergabung di Channel/Grup kami untuk melihat LINK VIDEO yang kami bagikan.</b>\n\n<b>Silakan join ke Channel & Group telebih dahulu lalu klik 'COBA LAGI'</b>\n\n<a href='{url}'>©️<i>Bokepsenja.com</i></a>"
+    "<b>Selamat Datang {first}</b>\n\n<b>Anda diwajibkan bergabung di Channel/Grup kami untuk melihat LINK VIDEO yang kami bagikan.</b>\n\n<b>Silakan join ke Channel & Group telebih dahulu lalu klik 'COBA LAGI'</b>\n\n<a href='{url}'>©️<i>Bokepsenja.com</i></a>"
 )
 
 
