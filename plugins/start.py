@@ -183,7 +183,7 @@ async def not_joined(client: Bot, message: Message):
         # Isi pesan
         text_msg = (
             f"📺 <b>{title}</b>\n\n"
-            f"<a href='https://bokepsenja.com'>©️<b>Bokepsenja.com</b></a>"
+            f"<a href='https://bokepsenja.com'>©️<i>Bokepsenja.com</i></a>"
         )
 
         # Tombol di bawah pesan
