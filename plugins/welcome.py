@@ -18,11 +18,10 @@ async def add_group(client, message):
             name += " " + member.last_name
 
         share_message = (
-            "🔥 **Bergabung di Grup Baru :**\n\n"
-            "**BokepSenja .com** 💦 : https://t.me/joinchat/j4cRH_jg7VJhN2I1\n\n"
-            "**Asupan SMA** 💦 : https://t.me/joinchat/JdpYxovFx3IyMjg1\n\n"
-            "**Channel ** 💦 : @BokepSenjaBot\n\n"
-            "**Website** : https://bokepsenja.com"
+            "🔥 **𝗕𝗘𝗥𝗚𝗔𝗕𝗨𝗡𝗚 𝗗𝗜 𝗚𝗥𝗨𝗣 𝗕𝗔𝗥𝗨 :**\n\n"
+            "**𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼 ** 💦 : https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy\n"
+            "**𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼** 💦 : https://t.me/joinchat/JdpYxovFx3IyMjg1\n"
+            "**𝘽𝙊𝙆𝙀𝙋𝙎𝙀𝙉𝙅𝘼** 💦 : https://t.me/joinchat/j4cRH_jg7VJhN2I1\n"
         )
 
         from urllib.parse import quote
