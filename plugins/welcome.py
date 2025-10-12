@@ -25,7 +25,7 @@ async def add_group(client, message):
             "⭐ 𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼 💦\n"
             "➤ __https://t.me/joinchat/JdpYxovFx3IyMjg1__\n\n"
             "⭐ 𝘽𝙊𝙆𝙀𝙋𝙎𝙀𝙉𝙅𝘼 💦\n"
-            "➤ __https://t.me/joinchat/j4cRH_jg7VJhN2I1__"
+            "➤ __https://t.me/+FDTYBy3kQI8wZWQ9__"
         )
 
         from urllib.parse import quote
