@@ -6,6 +6,7 @@ import aiohttp
 from io import BytesIO
 from PIL import Image
 import ntplib, time, os
+from pyrogram.enums import ParseMode
 
 from bot import Bot
 
@@ -18,11 +19,11 @@ async def add_group(client, message):
             name += " " + member.last_name
 
         share_message = (
-            "🔥𝗕𝗘𝗥𝗚𝗔𝗕𝗨𝗡𝗚 𝗗𝗜 𝗚𝗥𝗨𝗣 𝗕𝗔𝗥𝗨🔥\n\n"
-            "[𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼  💦](https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy)\n"
-            "[𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼  💦](https://t.me/joinchat/JdpYxovFx3IyMjg1)\n"
-            "[𝘽𝙊𝙆𝙀𝙋𝙎𝙀𝙉𝙅𝘼  💦](https://t.me/joinchat/j4cRH_jg7VJhN2I1)\n\n"
-            "[__©️Bokepsenja.com__  💦](https://bokepsenja.com)\n"
+            "🔥<b>𝗕𝗘𝗥𝗚𝗔𝗕𝗨𝗡𝗚 𝗗𝗜 𝗚𝗥𝗨𝗣 𝗕𝗔𝗥𝗨</b>🔥<br><br>"
+            "<a href='https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy'>𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼 💦</a><br>"
+            "<a href='https://t.me/joinchat/JdpYxovFx3IyMjg1'>𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼 💦</a><br>"
+            "<a href='https://t.me/joinchat/j4cRH_jg7VJhN2I1'>𝘽𝙊𝙆𝙀𝙋𝙎𝙀𝙉𝙅𝘼 💦</a><br><br>"
+            "<a href='https://bokepsenja.com'>©️Bokepsenja.com 💦</a>"
         )
 
         from urllib.parse import quote
@@ -41,6 +42,7 @@ async def add_group(client, message):
         sent_message = await client.send_photo(
             chat_id=message.chat.id,
             photo="https://i.ibb.co/L8YvcTB/6276011250815189839-120.jpg",
+            parse_mode=ParseMode.HTML,
             caption=f"👋 Hai {name}\n\n"
                     "Semua Chat Disembunyikan Untuk Anggota Baru\n"
                     "Anda Harus Membuka Kunci Dengan Cara Bagikan Ke 3 - 5 Grup.\n\n"
