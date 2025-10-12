@@ -7,8 +7,10 @@ from io import BytesIO
 from PIL import Image
 import ntplib, time, os
 
+from bot import Bot
+
 # === Event: User Baru Masuk Grup ===
-@app.on_message(filters.new_chat_members)
+@Bot.on_message(filters.new_chat_members)
 async def add_group(client, message):
     for member in message.new_chat_members:
         name = member.first_name
