@@ -73,11 +73,7 @@ def fsub_button(client, message):
     if FORCE_SUB_CHANNEL and not FORCE_SUB_GROUP:
         buttons = [
             [
-                InlineKeyboardButton(text="🔥ʙᴜᴋᴀ ʟɪɴᴋ ᴠɪᴅᴇᴏ🔥", url=url),
-            ],
-            [
                 InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink),
-                InlineKeyboardButton(text="ᴠɪᴅᴇᴏ ʟᴀɪɴɴʏᴀ", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy"),
             ],
         ]
         try:
