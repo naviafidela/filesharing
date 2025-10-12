@@ -50,5 +50,5 @@ async def add_group(client, message):
             has_spoiler=True
         )
 
-        await asyncio.sleep(30)
+        await asyncio.sleep(60)
         await sent_message.delete()
