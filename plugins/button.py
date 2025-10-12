@@ -2,7 +2,7 @@
 # FROM File-Sharing-Man <https://github.com/mrismanaziz/File-Sharing-Man/>
 # t.me/SharingUserbot & t.me/Lunatic0de
 
-from config import FORCE_SUB_CHANNEL, FORCE_SUB_GROUP
+from config import FORCE_SUB_CHANNEL, FORCE_SUB_GROUP, url
 from pyrogram.types import InlineKeyboardButton
 
 
@@ -11,7 +11,7 @@ def start_button(client):
         buttons = [
             [
                 InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅs", callback_data="help"),
-                InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ p", callback_data="close"),
+                InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data="close"),
             ],
         ]
         return buttons
@@ -72,8 +72,15 @@ def fsub_button(client, message):
         return buttons
     if FORCE_SUB_CHANNEL and not FORCE_SUB_GROUP:
         buttons = [
+                [
+                    InlineKeyboardButton(text="🔥ʙᴜᴋᴀ ʟɪɴᴋ ᴠɪᴅᴇᴏ🔥", url=url),
+                ]
+            ],[
             [
                 InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink),
+            ],
+            [
+                InlineKeyboardButton(text="ᴠɪᴅᴇᴏ ʟᴀɪɴɴʏᴀ", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy"),
             ],
         ]
         try:
