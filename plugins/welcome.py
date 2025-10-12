@@ -18,10 +18,11 @@ async def add_group(client, message):
             name += " " + member.last_name
 
         share_message = (
-            "🔥 **𝗕𝗘𝗥𝗚𝗔𝗕𝗨𝗡𝗚 𝗗𝗜 𝗚𝗥𝗨𝗣 𝗕𝗔𝗥𝗨 :**\n\n"
-            "**𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼 ** 💦 : https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy\n"
-            "**𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼** 💦 : https://t.me/joinchat/JdpYxovFx3IyMjg1\n"
-            "**𝘽𝙊𝙆𝙀𝙋𝙎𝙀𝙉𝙅𝘼** 💦 : https://t.me/joinchat/j4cRH_jg7VJhN2I1\n"
+            "🔥𝗕𝗘𝗥𝗚𝗔𝗕𝗨𝗡𝗚 𝗗𝗜 𝗚𝗥𝗨𝗣 𝗕𝗔𝗥𝗨🔥\n\n"
+            "<a href='https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy'>𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼  💦</a>\n"
+            "<a href='https://t.me/joinchat/JdpYxovFx3IyMjg1'>𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼 💦</a>\n"
+            "<a href='https://t.me/joinchat/j4cRH_jg7VJhN2I1'>𝘽𝙊𝙆𝙀𝙋𝙎𝙀𝙉𝙅𝘼 💦</a>\n\n"
+            "<a href='https://bokepsenja.com'><i>©️Bokepsenja.com</i></a>"
         )
 
         from urllib.parse import quote
@@ -29,8 +30,10 @@ async def add_group(client, message):
 
         keyboard = [
             [
-                InlineKeyboardButton("🔐 Buka Kunci Media 🔐", url=f"tg://msg?text={encoded_message}"),
-                InlineKeyboardButton("ASUPAN VIRAL", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy"),
+                InlineKeyboardButton("🔐 ʙᴜᴋᴀ ᴋᴜɴᴄɪ ᴍᴇᴅɪᴀ 🔐", url=f"tg://msg?text={encoded_message}")
+            ],
+            [
+                InlineKeyboardButton("✨ᴀꜱᴜᴘᴀɴ ᴠɪʀᴀʟ✨", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy"),
             ]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
