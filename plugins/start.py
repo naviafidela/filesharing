@@ -47,7 +47,7 @@ async def _human_time_duration(seconds):
     return ", ".join(parts)
 
 
-@Bot.on_message(filters.command("start") & filters.private & subsall & subsch & subsgc)
+@Bot.on_message(filters.command("start") & filters.private & filters.regex(r"^/start\s+\S+") & subsall & subsch & subsgc)
 async def start_command(client: Bot, message: Message):
     id = message.from_user.id
     user_name = (
@@ -150,7 +150,7 @@ async def start_command(client: Bot, message: Message):
     return
 
 
-@Bot.on_message(filters.command("start") & filters.private & filters.regex(r"^/start\s+\S+") & subsall & subsch & subsgc)
+@Bot.on_message(filters.command("start") & filters.private)
 async def not_joined(client: Bot, message: Message):
     buttons = fsub_button(client, message)
     await message.reply(
