@@ -28,7 +28,10 @@ async def add_group(client, message):
         encoded_message = quote(share_message)
 
         keyboard = [
-            [InlineKeyboardButton("🔐 Buka Kunci Media 🔐", url=f"tg://msg?text={encoded_message}")]
+            [
+                InlineKeyboardButton("🔐 Buka Kunci Media 🔐", url=f"tg://msg?text={encoded_message}"),
+                InlineKeyboardButton("ASUPAN VIRAL", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy"),
+            ]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
