@@ -86,7 +86,7 @@ else:
 # Template pesan dinamis
 FORCE_MSG = os.environ.get(
     "FORCE_SUB_MESSAGE",
-    f"🔥🎬 <b>{title}</b>\n\n🔗 <a href='{url}'>Tonton Sekarang</a>"
+    f"🔥📺 <b>{title}</b>\n\n<a href='{url}'>©️<i>Bokepsenja.com</i></a>"
 )
 
 
