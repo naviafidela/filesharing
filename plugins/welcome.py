@@ -21,11 +21,11 @@ async def add_group(client, message):
         share_message = (
             "🔥𝗕𝗘𝗥𝗚𝗔𝗕𝗨𝗡𝗚 𝗗𝗜 𝗚𝗥𝗨𝗣 𝗕𝗔𝗥𝗨🔥\n\n"
             "⭐ 𝙋𝙀𝙈𝙀𝙍𝙎𝘼𝙏𝙐 𝘽𝘼𝙉𝙂𝙎𝘼 💦\n"
-            "➤ __https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy__\n\n"
+            "➤ __https://t.me/JapanBestBot?start=Z2V0LTEyOTI2NjQyMTQ0OTQ2Ng__\n\n"
             "⭐ 𝘼𝙎𝙐𝙋𝘼𝙉 𝙎𝙈𝘼 💦\n"
-            "➤ __https://t.me/joinchat/JdpYxovFx3IyMjg1__\n\n"
-            "⭐ 𝘽𝙊𝙆𝙀𝙋𝙎𝙀𝙉𝙅𝘼 💦\n"
-            "➤ __https://t.me/+FDTYBy3kQI8wZWQ9__"
+            "➤ __https://t.me/+eff_ZFWp6lllZjk1__\n\n"
+            "⭐ 𝗕𝗢𝗞𝗘𝗣𝟮𝟬𝟮𝟲 💦\n"
+            "➤ __https://t.me/+QrnajiNe6ug3YmVl__"
         )
 
         from urllib.parse import quote
