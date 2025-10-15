@@ -36,7 +36,7 @@ async def add_group(client, message):
                 InlineKeyboardButton("🔐 ʙᴜᴋᴀ ᴋᴜɴᴄɪ ᴍᴇᴅɪᴀ 🔐", url=f"tg://msg?text={encoded_message}")
             ],
             [
-                InlineKeyboardButton("✨ᴀꜱᴜᴘᴀɴ ᴠɪʀᴀʟ✨", url="https://t.me/VideoAsupanViralBot?start=Z2V0LTMzMDY4MTU0MzI0Mjgy"),
+                InlineKeyboardButton("✨ᴀꜱᴜᴘᴀɴ ᴠɪʀᴀʟ✨", url="https://t.me/JapanBestBot?start=Z2V0LTEyNDI1NjA5NTAzNjY5Ng"),
             ]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
